@@ -6,4 +6,7 @@ public interface List<E> {
     void show ();
     int size ();
     E get ();
+    E remove (Position<E> p);
+    E get (Position<E> p);
+    Position<E> search (E e);
 }
