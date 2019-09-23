@@ -130,9 +130,9 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     //Private method for controlling the state of the position given from the exterior of the operation.
-    private DoubleLinkedNode<E> checkPosition (Position<E> p) {
+    private DoubleLinkedNode<E> checkPosition (Position<E> p) throws RuntimeException {
         if ((p == null) || !(p instanceof DoubleLinkedNode)) {
-            throw new RuntimeException("The node is null");
+            throw new RuntimeException("The position is invalid.");
         }
 
         DoubleLinkedNode<E> node = (DoubleLinkedNode<E>) p;
