@@ -9,13 +9,13 @@ public class LinkedTree<E> implements Tree<E> {
     private TreeNode<E> root;
     private class TreeNode<E> implements Position<E> {
         private E elem;
-        private TreeNode<E> father;
+        private TreeNode<E> parent;
         private DoubleLinkedList<TreeNode<E>> children;
         private LinkedTree<E> tid;
 
-        public TreeNode (E e, TreeNode<E> n, DoubleLinkedList<TreeNode<E>> l, LinkedTree<E> id) {
+        public TreeNode (E e, TreeNode<E> p, DoubleLinkedList<TreeNode<E>> l, LinkedTree<E> id) {
             this.elem = e;
-            this.father = n;
+            this.parent = p;
             this.children = l;
             this.tid = id;
         }
@@ -24,20 +24,20 @@ public class LinkedTree<E> implements Tree<E> {
             return this.elem;
         }
 
-        public TreeNode<E> getFather () {
-            return this.father;
+        public TreeNode<E> getParent () {
+            return this.parent;
         }
 
-        public void setFather (TreeNode<E> father) {
-            this.father = father;
+        public void setParent (TreeNode<E> p) {
+            this.parent = p;
         }
 
         public DoubleLinkedList<TreeNode<E>> getChildren () {
-            return children;
+            return this.children;
         }
 
         public LinkedTree<E> getTid () {
-            return tid;
+            return this.tid;
         }
 
         public void setTid (LinkedTree<E> id) {
@@ -88,10 +88,10 @@ public class LinkedTree<E> implements Tree<E> {
 
     //O(1)
     @Override
-    public Position<E> add (Position<E> f, E e) throws RuntimeException {
-        TreeNode<E> father = checkPosition(f);
-        TreeNode<E> newNode = new TreeNode<>(e, father, new DoubleLinkedList<>(), this);
-        DoubleLinkedList<TreeNode<E>> l = father.getChildren();
+    public Position<E> add (Position<E> p, E e) throws RuntimeException {
+        TreeNode<E> parent = checkPosition(p);
+        TreeNode<E> newNode = new TreeNode<>(e, parent, new DoubleLinkedList<>(), this);
+        DoubleLinkedList<TreeNode<E>> l = parent.getChildren();
         l.addLast(newNode);
         this.size++;
         return newNode;
@@ -109,13 +109,13 @@ public class LinkedTree<E> implements Tree<E> {
         TreeNode<E> node = checkPosition(p);
         node.setTid(null);
 
-        if (node.getFather() == null) {
+        if (node.getParent() == null) {
             this.root = null;
             this.size = 0;
         }
         else {
-            TreeNode<E> father = node.getFather();
-            //father.getChildren().remove(node);
+            TreeNode<E> parent = node.getParent();
+            //parent.getChildren().remove(node);
             Iterator<Position<E>> it = new BreathFirstTreeIterator<>(this);
             int cont = 1;
             while(it.hasNext()) {

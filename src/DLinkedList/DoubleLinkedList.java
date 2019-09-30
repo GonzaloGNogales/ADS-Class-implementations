@@ -158,7 +158,7 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     @Override
-    public Iterator<Position<E>> iterator () {
+    public Iterator<E> iterator () {
         return null;
     }
 

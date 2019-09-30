@@ -2,7 +2,7 @@ package DLinkedList;
 
 import java.util.Iterator;
 
-public interface List<E> extends Iterable<Position<E>> {
+public interface List<E> extends Iterable<E> {
     boolean isEmpty ();
     Position<E> addLast (E e);
     void show ();
@@ -11,5 +11,5 @@ public interface List<E> extends Iterable<Position<E>> {
     E remove (Position<E> p);
     E get (Position<E> p);
     Position<E> search (E e);
-    Iterator<Position<E>> iterator();
+    Iterator<E> iterator();
 }
