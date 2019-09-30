@@ -1,5 +1,7 @@
 package DLinkedList;
 
+import java.util.Iterator;
+
 public class DoubleLinkedList<E> implements List<E> {
     private int size;
     private DoubleLinkedNode<E> head,tail;
@@ -41,6 +43,7 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     //isEmpty O(1)
+    @Override
     public boolean isEmpty () {
         return this.size == 0;
     }
@@ -65,6 +68,7 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     //Not best implementation of function show O(n)
+    @Override
     public void show () {
         if (!this.isEmpty()) {
             DoubleLinkedNode<E> aux = this.head;
@@ -77,6 +81,7 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     //size O(1)
+    @Override
     public int size () {
         if (!this.isEmpty()) {
             return this.size;
@@ -86,6 +91,7 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     //get O(1)
+    @Override
     public E get () {
         if (!this.isEmpty()) {
             return this.head.getElem();
@@ -95,13 +101,14 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     //get the element from a specific position of the list O(1)
+    @Override
     public E get (Position<E> p) throws RuntimeException {
         DoubleLinkedNode<E> node = checkPosition(p);
-
         return node.getElem();
     }
 
     //remove O(1)
+    @Override
     public E remove (Position<E> p) throws RuntimeException {
         DoubleLinkedNode<E> node = checkPosition(p);
         E elem = node.getElem();
@@ -147,6 +154,11 @@ public class DoubleLinkedList<E> implements List<E> {
     //Searches an element inside the list in an inevitably complexity of O(n)
     public Position<E> search (E e) {
         //For searching on a linked list you are forced into O(n).
+        return null;
+    }
+
+    @Override
+    public Iterator<Position<E>> iterator () {
         return null;
     }
 

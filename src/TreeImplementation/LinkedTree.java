@@ -2,6 +2,7 @@ package TreeImplementation;
 
 import DLinkedList.DoubleLinkedList;
 import DLinkedList.Position;
+import java.util.Iterator;
 
 public class LinkedTree<E> implements Tree<E> {
     private int size;
@@ -38,21 +39,43 @@ public class LinkedTree<E> implements Tree<E> {
         public LinkedTree<E> getTid () {
             return tid;
         }
+
+        public void setTid (LinkedTree<E> id) {
+            this.tid = id;
+        }
     }
 
+    //O(1)
+    @Override
     public boolean isEmpty () {
         return this.size == 0;
     }
 
+    //O(1)
+    @Override
     public int size () {
         return this.size;
     }
 
+    //O(1)
+    @Override
+    public Position<E> root () throws RuntimeException {
+        if (this.isEmpty()) {
+            throw new RuntimeException("The tree is empty.");
+        }
+
+        return this.root;
+    }
+
+    //O(1)
+    @Override
     public boolean isLeaf (Position<E> p) throws RuntimeException {
         TreeNode<E> node = checkPosition(p);
         return node.getChildren().isEmpty();
     }
 
+    //O(1)
+    @Override
     public Position<E> addRoot (E e) throws RuntimeException {
         if (!this.isEmpty()) {
             throw new RuntimeException("The tree has a root already.");
@@ -63,6 +86,8 @@ public class LinkedTree<E> implements Tree<E> {
         return this.root;
     }
 
+    //O(1)
+    @Override
     public Position<E> add (Position<E> f, E e) throws RuntimeException {
         TreeNode<E> father = checkPosition(f);
         TreeNode<E> newNode = new TreeNode<>(e, father, new DoubleLinkedList<>(), this);
@@ -71,6 +96,41 @@ public class LinkedTree<E> implements Tree<E> {
         this.size++;
         return newNode;
     }
+
+    //O(1)
+    @Override
+    public Iterable<? extends Position<E>> children (Position<E> p) throws RuntimeException {
+        TreeNode<E> node = checkPosition(p);
+        return node.getChildren();
+    }
+
+    //Review
+    public void remove (Position<E> p) throws RuntimeException {
+        TreeNode<E> node = checkPosition(p);
+        node.setTid(null);
+
+        if (node.getFather() == null) {
+            this.root = null;
+            this.size = 0;
+        }
+        else {
+            TreeNode<E> father = node.getFather();
+            //father.getChildren().remove(node);
+            Iterator<Position<E>> it = new BreathFirstTreeIterator<>(this);
+            int cont = 1;
+            while(it.hasNext()) {
+                //Continue code here...
+            }
+        }
+    }
+
+    //Iterates the structure with O(n) complexity
+    @Override
+    public Iterator<Position<E>> iterator () {
+        Iterator<Position<E>> it = new BreathFirstTreeIterator<>(this);
+        return it;
+    }
+
 
     //Private method for controlling the state of the position given from the exterior of the operation.
     private TreeNode<E> checkPosition (Position<E> p) throws RuntimeException {
