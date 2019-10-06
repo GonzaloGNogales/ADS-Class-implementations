@@ -1,5 +1,6 @@
 package TreeImplementation;
-import DLinkedList.Position;
+
+import java.util.Iterator;
 
 public class PrincipalTree {
     public static void main (String[] args) {
@@ -10,18 +11,23 @@ public class PrincipalTree {
             System.out.println("The tree is empty." + "\n");
         }
 
-        Position<Integer> r = t.addRoot(8);
-        //Position<Integer> brokenR = t.addRoot(3); Method exception test
-        Position<Integer> rChild1 = t.add(r, 1);
-        Position<Integer> rChild2 = t.add(r, 2);
-        Position<Integer> rChild3 = t.add(r, 3);
-        Position<Integer> rChild4 = t.add(r, 4);
-        Position<Integer> child1Child1 = t.add(rChild1, 5);
-        Position<Integer> child1Child2 = t.add(rChild1, 6);
-        Position<Integer> child4Child1 = t.add(rChild4, 19);
+        TreePosition<Integer> r = t.addRoot(8);
+        //TreePosition<Integer> brokenR = t.addRoot(3); Method exception test
+        TreePosition<Integer> rChild1 = t.add(r, 1);
+        TreePosition<Integer> rChild2 = t.add(r, 2);
+        TreePosition<Integer> rChild3 = t.add(r, 3);
+        TreePosition<Integer> rChild4 = t.add(r, 4);
+        TreePosition<Integer> child1Child1 = t.add(rChild1, 5);
+        TreePosition<Integer> child1Child2 = t.add(rChild1, 6);
+        TreePosition<Integer> child4Child1 = t.add(rChild4, 19);
+        TreePosition<Integer> child1Child1Child1 = t.add(child1Child1, 27);
 
 
-        System.out.println(t.size() + "\n" + t.isLeaf(child4Child1) + "\n");
+        //System.out.println(t.size() + "\n" + t.isLeaf(child4Child1) + "\n");
+
+        for (TreePosition<Integer> p: t) {
+            System.out.println(p.getElem() + " ");
+        }
 
     }
 }
