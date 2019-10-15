@@ -85,14 +85,30 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
 
     //O(1)
     @Override
-    public Position<E> left () throws RuntimeException {
-        return this.root.getLeftChild();
+    public Position<E> left (Position<E> p) throws RuntimeException {
+        BinaryNode<E> node = checkPosition(p);
+        return node.getLeftChild();
     }
 
     //O(1)
     @Override
-    public boolean hasLeft () {
-        return (this.root.getLeftChild() != null);
+    public Position<E> right (Position<E> p) throws RuntimeException {
+        BinaryNode<E> node = checkPosition(p);
+        return node.getRightChild();
+    }
+
+    //O(1)
+    @Override
+    public boolean hasLeft (Position<E> p) {
+        BinaryNode<E> node = checkPosition(p);
+        return (node.getLeftChild() != null);
+    }
+
+    //O(1)
+    @Override
+    public boolean hasRight (Position<E> p) {
+        BinaryNode<E> node = checkPosition(p);
+        return (node.getRightChild() != null);
     }
 
     //O(1)
@@ -240,10 +256,10 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
         return node;
     }
 
-    //Iterator method that internally iterates in the upgraded for call.
+    //Iterator method that sets the custom iterator for the upgraded for iteration in main class.
     @Override
-    public Iterator<E> iterator() {
-        return null;
+    public Iterator<Position<E>> iterator () {
+        return new InorderBinaryTreeIterator<>(this);
     }
 
 }
